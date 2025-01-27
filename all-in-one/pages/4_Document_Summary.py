@@ -35,7 +35,7 @@ if st.button("Summarize"):
               # Initialize the OpenAI module, load and run the summarize chain
               llm = ChatOpenAI(temperature=0, openai_api_key=openai_api_key)
               chain = load_summarize_chain(llm, chain_type="stuff")
-              search = vectordb.similarity_search(" ")
+              search = vectordb.similarity_search(" ", k=1000)  # Set a high k value to get all documents
               summary = chain.run(input_documents=search, question="Write a summary within 200 words.")
 
               st.success(summary)
